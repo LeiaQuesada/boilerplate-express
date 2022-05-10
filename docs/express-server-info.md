@@ -27,3 +27,14 @@ This method needs an absolute file path.
 We recommend you to use the Node global variable \_\_dirname to calculate the path like this:
 
 absolutePath = \_\_dirname + relativePath/file.ext
+
+## Serve Static Assets
+
+An HTML server usually has one or more directories that are accessible by the user. You can place there the static assets needed by your application (stylesheets, scripts, images).
+
+In Express, you can put in place this functionality using the middleware express.static(path), where the path parameter is the absolute path of the folder containing the assets.
+Middleware are functions that intercept route handlers, adding some kind of information. A middleware needs to be mounted using the method app.use(path, middlewareFunction). The first path argument is optional. If you don’t pass it, the middleware will be executed for all requests.
+
+To serve static assets from the public folder you can use the express.static() method as the middleware which takes the endpoint and the absolute path to the directory containing the static assets as arguments and exposes the files in that folder at the given endpoint. By default, if the endpoint is not passed to the method, the folder is exposed at the root endpoint i.e. / for the application.
+
+The \_\_dirname variable is a string containing the absolute path to the root of your project which has to be concatenated with the folder containing the assets.
