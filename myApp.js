@@ -1,5 +1,6 @@
 let express = require("express");
 let app = express();
+require("dotenv").config();
 
 // Normal usage
 app.use(express.static(__dirname + "/public"));
@@ -8,9 +9,15 @@ app.use(express.static(__dirname + "/public"));
 app.use("/public", express.static(__dirname + "/public"));
 
 app.get("/json", function (req, res) {
-  res.json({
-    message: "Hello json",
-  });
+  if (process.env.MESSAGE_STYLE === "uppercase") {
+    res.json({
+      message: "HELLO JSON",
+    });
+  } else {
+    res.json({
+      message: "Hello json",
+    });
+  }
 });
 
 // Send the /views/index.html file as a response to GET requests to the / path

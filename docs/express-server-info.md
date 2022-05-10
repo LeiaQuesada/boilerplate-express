@@ -55,3 +55,17 @@ then sets the appropriate headers to tell your browser that you are serving JSON
 and sends the data back.
 
 A valid object has the usual structure {key: data}. data can be a number, a string, a nested object or an array. data can also be a variable or the result of a function call, in which case it will be evaluated before being converted into a string.
+
+## Use the .env File
+
+The .env file is a hidden file that is used to pass environment variables to your application. This file is secret, no one but you can access it, and it can be used to store data that you want to keep private or hidden. For example, you can store API keys from external services or your database URI. You can also use it to store configuration options. By setting configuration options, you can change the behavior of your application, without the need to rewrite some code.
+
+The environment variables are accessible from the app as process.env.VAR_NAME. The process.env object is a global Node object, and variables are passed as strings. By convention, the variable names are all uppercase, with words separated by an underscore. The .env is a shell file, so you don’t need to wrap names or values in quotes. It is also important to note that there cannot be space around the equals sign when you are assigning values to your variables, e.g. VAR_NAME=value. Usually, you will put each variable definition on a separate line.
+
+Let's add an environment variable as a configuration option.
+
+Create a .env file in the root of your project directory, and store the variable MESSAGE_STYLE=uppercase in it.
+
+Then, in the /json GET route handler you created in the last challenge, transform the response object's message to uppercase if process.env.MESSAGE_STYLE equals uppercase. The response object should either be {"message": "Hello json"} or {"message": "HELLO JSON"}, depending on the MESSAGE_STYLE value.
+
+If you are working locally, you will need the dotenv package. It loads environment variables from your .env file into process.env. Install it with `npm install dotenv`. Then, at the top of your myApp.js file, import and load the variables with `require('dotenv').config()`.
