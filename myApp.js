@@ -44,6 +44,13 @@ app.get("/name", function (req, res) {
   });
 });
 
+app.post("/name", (req, res) => {
+  const fullName = req.body.first + " " + req.body.last;
+  res.json({
+    name: fullName,
+  });
+});
+
 app.get(
   "/now",
   (req, res, next) => {
