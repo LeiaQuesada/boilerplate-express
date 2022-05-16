@@ -26,6 +26,18 @@ app.get("/json", function (req, res) {
   }
 });
 
+// Given the endpoint URL, /name?first=firstname&last=lastname
+app.get("/name", function (req, res) {
+  // const firstName = req.query.first;
+  // const lastName = req.query.last;
+  // OR you can destructure and rename the keys
+  const { first: firstName, last: lastName } = req.query;
+  // Use template literals to form a formatted string
+  res.json({
+    name: `${firstName} ${lastName}`,
+  });
+});
+
 app.get(
   "/now",
   (req, res, next) => {
