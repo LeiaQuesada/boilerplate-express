@@ -1,6 +1,12 @@
 let express = require("express");
 let app = express();
+let bodyParser = require("body-parser");
+
 require("dotenv").config();
+
+// bodyParser needs to be declared at the top of the file
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Logger, needs to be at the top to catch all requests
 app.use((req, res, next) => {
