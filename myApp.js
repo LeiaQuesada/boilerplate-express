@@ -2,7 +2,7 @@ let express = require("express");
 let app = express();
 require("dotenv").config();
 
-// Logger for all requests
+// Logger, needs to be at the top to catch all requests
 app.use((req, res, next) => {
   console.log(req.method + " " + req.path + " - " + req.ip);
   next();
@@ -25,6 +25,19 @@ app.get("/json", function (req, res) {
     });
   }
 });
+
+app.get(
+  "/now",
+  (req, res, next) => {
+    req.time = new Date().toString();
+    next();
+  },
+  (req, res) => {
+    res.json({
+      time: req.time,
+    });
+  }
+);
 
 // Send the /views/index.html file as a response to GET requests to the / path
 app.get("/", function (req, res) {
