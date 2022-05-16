@@ -2,6 +2,12 @@ let express = require("express");
 let app = express();
 require("dotenv").config();
 
+// Logger for all requests
+app.use((req, res, next) => {
+  console.log(req.method + " " + req.path + " - " + req.ip);
+  next();
+});
+
 // Normal usage
 app.use(express.static(__dirname + "/public"));
 
